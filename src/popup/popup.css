@@ -1,0 +1,567 @@
+/**
+ * AWS Multi-Session Custom Alias - Popup Styles
+ * ポップアップ画面のスタイル定義
+ */
+
+/* 基本設定 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
+  background: #f8f9fa;
+  width: 380px;
+  min-height: 500px;
+}
+
+/* ポップアップコンテナ */
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ヘッダー */
+.popup-header {
+  background: linear-gradient(135deg, #3450fb 0%, #4f69ff 100%);
+  color: white;
+  padding: 16px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.header-text h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.header-text p {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* メインコンテンツ */
+.popup-main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* フォームセクション */
+.add-alias-section {
+  margin-bottom: 24px;
+}
+
+.add-alias-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.alias-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3450fb;
+  box-shadow: 0 0 0 3px rgba(52, 80, 251, 0.1);
+}
+
+.form-group input:invalid {
+  border-color: #e74c3c;
+}
+
+.form-help {
+  font-size: 11px;
+  color: #888;
+}
+
+/* ボタン */
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.btn-primary {
+  background: #3450fb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2a42e6;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: white;
+  color: #666;
+  border: 2px solid #e1e5e9;
+}
+
+.btn-outline:hover {
+  border-color: #3450fb;
+  color: #3450fb;
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* エイリアス一覧セクション */
+.alias-list-section {
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.alias-count {
+  font-size: 12px;
+  color: #888;
+  background: #f1f3f4;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+/* エイリアス一覧 */
+.alias-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.alias-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f8f9fa;
+  border: 1px solid #e1e5e9;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.alias-item:hover {
+  background: #f1f3f4;
+  border-color: #d0d7de;
+}
+
+.alias-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.alias-account-id {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.alias-name {
+  font-size: 12px;
+  color: #3450fb;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alias-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.alias-action-btn {
+  padding: 6px 8px;
+  background: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.alias-action-btn:hover {
+  background: #e1e5e9;
+  color: #333;
+}
+
+.alias-action-btn.delete:hover {
+  background: #fee;
+  color: #e74c3c;
+}
+
+/* 空状態 */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.empty-state p {
+  margin-bottom: 8px;
+}
+
+.empty-description {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* アクションボタン */
+.actions-section {
+  border-top: 1px solid #e1e5e9;
+  padding-top: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.action-buttons .btn {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  padding: 8px 12px;
+}
+
+/* フッター */
+.popup-footer {
+  padding: 12px 20px;
+  background: #f8f9fa;
+  border-top: 1px solid #e1e5e9;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #888;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #3450fb;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link-btn:hover {
+  color: #2a42e6;
+}
+
+.separator {
+  color: #ddd;
+}
+
+.version {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+}
+
+/* メッセージ */
+.message-container {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 8px;
+  animation: messageSlideIn 0.3s ease-out;
+  pointer-events: auto;
+}
+
+.message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.message.info {
+  background: #cce7ff;
+  color: #004085;
+  border: 1px solid #b3d7ff;
+}
+
+@keyframes messageSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ダイアログ */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: dialogFadeIn 0.2s ease-out;
+}
+
+.dialog {
+  background: white;
+  border-radius: 8px;
+  max-width: 320px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  animation: dialogSlideIn 0.2s ease-out;
+}
+
+.dialog-large {
+  max-width: 480px;
+}
+
+.dialog-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e1e5e9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialog-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #888;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+.dialog-body {
+  padding: 20px;
+}
+
+.dialog-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e1e5e9;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+@keyframes dialogFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialogSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ヘルプコンテンツ */
+.help-content h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.help-content h4:first-child {
+  margin-top: 0;
+}
+
+.help-content p {
+  margin-bottom: 12px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.help-content ul {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.help-content li {
+  margin-bottom: 6px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.help-content strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* スクロールバー */
+.alias-list::-webkit-scrollbar,
+.popup-main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.alias-list::-webkit-scrollbar-track,
+.popup-main::-webkit-scrollbar-track {
+  background: #f1f3f4;
+  border-radius: 3px;
+}
+
+.alias-list::-webkit-scrollbar-thumb,
+.popup-main::-webkit-scrollbar-thumb {
+  background: #d0d7de;
+  border-radius: 3px;
+}
+
+.alias-list::-webkit-scrollbar-thumb:hover,
+.popup-main::-webkit-scrollbar-thumb:hover {
+  background: #c0c7ce;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 400px) {
+  body {
+    width: 320px;
+  }
+
+  .popup-main {
+    padding: 16px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .action-buttons .btn {
+    flex: none;
+  }
+}

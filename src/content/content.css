@@ -1,0 +1,204 @@
+/**
+ * AWS Multi-Session Custom Alias - Content Styles v1.0.0
+ * エイリアス表示用のスタイル定義
+ */
+
+/* エイリアス表示用の基本スタイル - すべて白色に統一 */
+.aws-custom-alias {
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+  text-shadow: none;
+  position: relative;
+  background: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  animation: aliasAppear 0.3s ease-out;
+}
+
+/* ナビゲーションバー内のエイリアス */
+[data-testid="awsc-nav-account-menu-button"] .aws-custom-alias,
+.nav-menu-account-name .aws-custom-alias {
+  font-size: 0.85em;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+/* セッションメニュー内のエイリアス */
+.session-menu-item .aws-custom-alias,
+.session-selector .aws-custom-alias {
+  font-size: 0.8em;
+  color: #16191f;
+  background: rgba(52, 80, 251, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+  display: inline-block;
+  border: 1px solid rgba(52, 80, 251, 0.3);
+}
+
+/* アカウントメニューのドロップダウン内 */
+.account-menu-content .aws-custom-alias {
+  font-size: 0.85em;
+  color: #3450fb;
+  font-weight: 500;
+  background: none;
+  -webkit-text-fill-color: #3450fb;
+}
+
+/* ホバー効果 */
+.aws-custom-alias:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* マルチセッション関連の要素 */
+.multi-session-account .aws-custom-alias {
+  font-size: 0.8em;
+  background: rgba(52, 80, 251, 0.15);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: #16191f;
+  border: 1px solid rgba(52, 80, 251, 0.4);
+  margin-left: 6px;
+}
+
+/* タイトル内のエイリアス */
+title .aws-custom-alias,
+h1 .aws-custom-alias,
+h2 .aws-custom-alias {
+  font-size: 0.9em;
+  color: #3450fb;
+  font-weight: 600;
+  background: none;
+  -webkit-text-fill-color: #3450fb;
+}
+
+/* ブレッドクラム内のエイリアス */
+.breadcrumb-item .aws-custom-alias {
+  font-size: 0.8em;
+  color: #666;
+  font-weight: normal;
+  background: none;
+  -webkit-text-fill-color: #666;
+  margin-left: 4px;
+}
+
+/* 小さなテキスト内のエイリアス */
+.small-text .aws-custom-alias,
+.text-sm .aws-custom-alias {
+  font-size: 0.75em;
+}
+
+/* 強調表示用のエイリアス */
+.aws-custom-alias.highlight {
+  background: #fff3cd;
+  color: #856404;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid #ffeaa7;
+  -webkit-text-fill-color: #856404;
+}
+
+/* エラー・警告表示用 */
+.aws-custom-alias.warning {
+  background: #f8d7da;
+  color: #721c24;
+  -webkit-text-fill-color: #721c24;
+}
+
+.aws-custom-alias.error {
+  background: #f5c6cb;
+  color: #721c24;
+  -webkit-text-fill-color: #721c24;
+}
+
+/* 成功表示用 */
+.aws-custom-alias.success {
+  background: #d4edda;
+  color: #155724;
+  -webkit-text-fill-color: #155724;
+}
+
+/* AWSコンソール特有の要素への対応 */
+
+/* AWSヘッダーの調整 */
+.awsui-context-top-navigation .aws-custom-alias {
+  font-size: 0.8em;
+  margin-left: 4px;
+  color: #3450fb;
+  background: none;
+  -webkit-text-fill-color: #3450fb;
+}
+
+/* メニューアイテム内の調整 */
+[role="menuitem"] .aws-custom-alias {
+  font-size: 0.8em;
+  margin-left: 6px;
+  background: rgba(52, 80, 251, 0.1);
+  padding: 1px 4px;
+  border-radius: 3px;
+  color: #16191f;
+  -webkit-text-fill-color: #16191f;
+}
+
+/* ドロップダウンメニュー内 */
+[role="menu"] .aws-custom-alias {
+  font-size: 0.8em;
+  color: #3450fb;
+  background: none;
+  -webkit-text-fill-color: #3450fb;
+  margin-left: 4px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .aws-custom-alias {
+    font-size: 0.75em;
+    padding: 1px 3px;
+  }
+
+  .session-menu-item .aws-custom-alias,
+  .session-selector .aws-custom-alias {
+    font-size: 0.7em;
+    padding: 1px 4px;
+    margin-left: 4px;
+  }
+}
+
+/* 高解像度ディスプレイ対応 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .aws-custom-alias {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+}
+
+/* アニメーション効果 */
+@keyframes aliasAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.aws-custom-alias {
+  animation: aliasAppear 0.3s ease-out;
+}
+
+/* フォーカス時の表示改善 */
+.aws-custom-alias:focus {
+  outline: 2px solid #3450fb;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* 選択時の表示改善 */
+.aws-custom-alias::selection {
+  background: rgba(52, 80, 251, 0.3);
+  color: #16191f;
+}

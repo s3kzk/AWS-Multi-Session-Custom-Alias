@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "AWS Multi-Session Custom Alias",
+  "version": "1.0.0",
+  "description": "AWSマルチセッション機能で個人用のカスタムエイリアスを設定・表示する拡張機能",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://*.console.aws.amazon.com/*",
+    "https://console.aws.amazon.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/background.js"
+  },
+  "action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.console.aws.amazon.com/*",
+        "https://console.aws.amazon.com/*"
+      ],
+      "js": [
+        "src/utils/storage.js",
+        "src/utils/alias.js",
+        "src/content/content.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AWS Custom Alias Settings</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="popup-container">
+      <!-- ヘッダー -->
+      <header class="popup-header">
+        <div class="header-content">
+          <img
+            src="../../icons/icon48.png"
+            alt="AWS Alias"
+            class="header-icon"
+            onerror="this.style.display='none'"
+          />
+          <div class="header-text">
+            <h1>AWS Custom Alias</h1>
+            <p>AWSアカウントのカスタムエイリアス設定</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- メインコンテンツ -->
+      <main class="popup-main">
+        <!-- エイリアス追加セクション -->
+        <section class="add-alias-section">
+          <h2>エイリアスを追加</h2>
+          <form id="add-alias-form" class="alias-form">
+            <div class="form-group">
+              <label for="account-id">AWSアカウントID</label>
+              <input
+                type="text"
+                id="account-id"
+                name="accountId"
+                placeholder="1234-5678-9012"
+                pattern="(\d{12}|\d{4}-\d{4}-\d{4})"
+                maxlength="14"
+                required
+                autocomplete="off"
+              />
+              <span class="form-help"
+                >12桁の数字またはハイフン区切り形式で入力してください</span
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="alias-name">エイリアス名</label>
+              <input
+                type="text"
+                id="alias-name"
+                name="aliasName"
+                placeholder="本番環境"
+                maxlength="50"
+                required
+                autocomplete="off"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">追加</button>
+          </form>
+        </section>
+
+        <!-- エイリアス一覧セクション -->
+        <section class="alias-list-section">
+          <div class="section-header">
+            <h2>登録済みエイリアス</h2>
+            <span id="alias-count" class="alias-count">0件</span>
+          </div>
+
+          <div id="alias-list" class="alias-list">
+            <!-- エイリアス項目がここに動的に追加される -->
+          </div>
+
+          <div id="empty-state" class="empty-state">
+            <div class="empty-icon">📝</div>
+            <p>エイリアスが登録されていません</p>
+            <p class="empty-description">
+              上記フォームからAWSアカウントのエイリアスを追加してください
+            </p>
+          </div>
+        </section>
+
+        <!-- アクションボタン -->
+        <section class="actions-section">
+          <div class="action-buttons">
+            <button
+              id="export-btn"
+              class="btn btn-outline"
+              title="エイリアスデータをエクスポート"
+            >
+              📤 エクスポート
+            </button>
+            <button
+              id="import-btn"
+              class="btn btn-outline"
+              title="エイリアスデータをインポート"
+            >
+              📥 インポート
+            </button>
+            <button
+              id="clear-all-btn"
+              class="btn btn-danger"
+              title="すべてのエイリアスを削除"
+            >
+              🗑️ すべて削除
+            </button>
+          </div>
+        </section>
+      </main>
+
+      <!-- フッター -->
+      <footer class="popup-footer">
+        <div class="footer-links">
+          <button id="help-btn" class="link-btn">ヘルプ</button>
+          <span class="separator">|</span>
+          <span class="version">v1.0.0</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- インポートファイル選択用の隠しinput -->
+    <input
+      type="file"
+      id="import-file-input"
+      accept=".json"
+      style="display: none"
+    />
+
+    <!-- メッセージ表示用 -->
+    <div id="message-container" class="message-container">
+      <!-- メッセージがここに表示される -->
+    </div>
+
+    <!-- 確認ダイアログ -->
+    <div id="confirm-dialog" class="dialog-overlay" style="display: none">
+      <div class="dialog">
+        <div class="dialog-header">
+          <h3 id="confirm-title">確認</h3>
+        </div>
+        <div class="dialog-body">
+          <p id="confirm-message">この操作を実行しますか？</p>
+        </div>
+        <div class="dialog-footer">
+          <button id="confirm-cancel" class="btn btn-outline">
+            キャンセル
+          </button>
+          <button id="confirm-ok" class="btn btn-primary">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ヘルプダイアログ -->
+    <div id="help-dialog" class="dialog-overlay" style="display: none">
+      <div class="dialog dialog-large">
+        <div class="dialog-header">
+          <h3>使い方</h3>
+          <button id="help-close" class="close-btn">&times;</button>
+        </div>
+        <div class="dialog-body">
+          <div class="help-content">
+            <h4>エイリアスの追加</h4>
+            <p>
+              AWSアカウントID（12桁の数字）とエイリアス名を入力して「追加」ボタンをクリックしてください。
+            </p>
+
+            <h4>エイリアスの表示</h4>
+            <p>
+              AWSコンソールのナビゲーションバーやマルチセッション画面で、アカウントIDの後にエイリアス名が表示されます。
+            </p>
+
+            <h4>データの管理</h4>
+            <ul>
+              <li>
+                <strong>エクスポート</strong>:
+                設定したエイリアスをJSONファイルとして保存できます
+              </li>
+              <li>
+                <strong>インポート</strong>:
+                他の環境で作成したエイリアス設定を読み込めます
+              </li>
+              <li>
+                <strong>すべて削除</strong>:
+                登録されているすべてのエイリアスを削除します
+              </li>
+            </ul>
+
+            <h4>注意事項</h4>
+            <ul>
+              <li>
+                エイリアスは個人の環境にのみ保存され、他のユーザーには影響しません
+              </li>
+              <li>
+                ARNやリソースID内のアカウントIDにはエイリアスは表示されません
+              </li>
+              <li>
+                ナビゲーションバーとマルチセッション関連画面のみが対象です
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../utils/storage.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
