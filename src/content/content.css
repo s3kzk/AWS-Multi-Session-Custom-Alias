@@ -202,3 +202,31 @@ h2 .aws-custom-alias {
   background: rgba(52, 80, 251, 0.3);
   color: #16191f;
 }
+
+/* セッション選択画面(/sessions/selector)でのエイリアス表示 */
+body[data-page="sessions-selector"] .aws-custom-alias,
+[href*="/sessions/selector"] .aws-custom-alias,
+.session-selector-page .aws-custom-alias {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background: none !important;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+/* sessions/selectorページの特定要素での黒文字表示 */
+.session-option .aws-custom-alias,
+.session-item .aws-custom-alias,
+.account-card .aws-custom-alias,
+.session-card .aws-custom-alias,
+.account-container .aws-custom-alias,
+.session-container .aws-custom-alias,
+[role="option"] .aws-custom-alias,
+[role="listitem"] .aws-custom-alias,
+.account-entry .aws-custom-alias,
+.session-entry .aws-custom-alias {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background: none !important;
+  font-weight: 600;
+}

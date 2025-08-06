@@ -16,10 +16,32 @@
   let observer = null;
 
   /**
+   * ページタイプを検出してbodyにマーカーを付与
+   */
+  function detectAndMarkPageType() {
+    const currentPath = window.location.pathname;
+    const currentHost = window.location.hostname;
+
+    // sessions/selectorページの検出
+    if (
+      currentPath.includes('/sessions/selector') ||
+      currentHost.includes('signin.aws.amazon.com')
+    ) {
+      document.body.setAttribute('data-page', 'sessions-selector');
+      console.log(
+        '🎯 Detected sessions/selector page - marked for black text styling'
+      );
+    }
+  }
+
+  /**
    * 初期化処理
    */
   async function initialize() {
     try {
+      // ページタイプの検出とマーキング
+      detectAndMarkPageType();
+
       // ストレージからエイリアスを読み込み
       aliasMap = await StorageManager.getAllAliases();
 
@@ -53,18 +75,23 @@
    */
   function shouldApplyAliases() {
     const currentPath = window.location.pathname;
+    const currentHost = window.location.hostname;
 
-    // console/home パスのみ許可
+    // console/home パスまたはsessions/selectorパスを許可
     const allowedPaths = [
       '/console/home',
       '/console/', // リダイレクト時の一時的なパス
+      '/sessions/selector', // AWSマルチセッション選択画面
     ];
 
     const isAllowedPath = allowedPaths.some((path) =>
       currentPath.includes(path)
     );
 
-    return isAllowedPath;
+    // signin.aws.amazon.comドメインの場合は特別扱い
+    const isSigninDomain = currentHost.includes('signin.aws.amazon.com');
+
+    return isAllowedPath || isSigninDomain;
   }
 
   /**
@@ -102,6 +129,15 @@
       '.multi-session',
       '.session-switcher',
       '.account-switcher',
+      // セッション選択画面特有のセレクタ
+      '.session-option',
+      '.session-item',
+      '.account-info',
+      '.account-card',
+      '.session-card',
+      '[data-testid*="session-option"]',
+      '[class*="session-list"]',
+      '[class*="account-list"]',
     ];
 
     let processedCount = 0;
@@ -137,6 +173,16 @@
       // 汎用的なアカウント情報セレクタ
       '*[class*="account"] *',
       '*[id*="account"] *',
+      // セッション選択画面用の追加セレクタ
+      '.account-container',
+      '.session-container',
+      '[role="option"]',
+      '[role="listitem"]',
+      '.account-entry',
+      '.session-entry',
+      '[data-account-id]',
+      '[aria-label*="Account"]',
+      '[aria-describedby*="account"]',
     ];
 
     sessionPanelSelectors.forEach((selector) => {
@@ -233,6 +279,24 @@
       '.multi-session',
       '.session-switcher',
       '.account-switcher',
+      // セッション選択画面特有のセレクタ
+      '.session-option',
+      '.session-item',
+      '.account-info',
+      '.account-card',
+      '.session-card',
+      '[data-testid*="session-option"]',
+      '[class*="session-list"]',
+      '[class*="account-list"]',
+      '.account-container',
+      '.session-container',
+      '[role="option"]',
+      '[role="listitem"]',
+      '.account-entry',
+      '.session-entry',
+      '[data-account-id]',
+      '[aria-label*="Account"]',
+      '[aria-describedby*="account"]',
     ];
 
     // ナビゲーション要素以外のエイリアスをクリア
@@ -378,6 +442,9 @@
    * ページ遷移時の処理
    */
   function handlePageTransition() {
+    // ページタイプの再検出とマーキング
+    detectAndMarkPageType();
+
     // URLから現在のアカウントを再検出
     detectCurrentAccount();
 
